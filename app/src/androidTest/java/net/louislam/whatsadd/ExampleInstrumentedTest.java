@@ -1,4 +1,4 @@
-package whatsadd.louislam.net.whatsadd;
+package net.louislam.whatsadd;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("whatsadd.louislam.net.whatsadd", appContext.getPackageName());
+        assertEquals("net.louislam.whatsadd", appContext.getPackageName());
     }
 }

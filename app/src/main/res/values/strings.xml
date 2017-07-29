@@ -22,4 +22,5 @@
         completions."
     </string>
     <string name="title_activity_main">WhatsAdd</string>
+    <string name="title_activity_nav">NavActivity</string>
 </resources>
