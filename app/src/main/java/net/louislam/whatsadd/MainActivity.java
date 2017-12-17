@@ -1,6 +1,7 @@
 package net.louislam.whatsadd;
 
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import net.louislam.android.L;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,11 +38,20 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
+        //L.alert(this, Locale.getDefault().getDisplayLanguage());
+
         final EditText areaCode = (EditText) findViewById(R.id.areaCode);
         final EditText number = (EditText) findViewById(R.id.number);
         ImageButton button = (ImageButton) findViewById(R.id.button);
 
-        areaCode.setText(L.getString(MainActivity.this, "areaCode"));
+        String areaCodeDefault = L.getString(MainActivity.this, "areaCode");
+
+        if (areaCodeDefault == null) {
+            areaCodeDefault = "852";
+        }
+
+        areaCode.setText(areaCodeDefault);
+        number.requestFocus();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +76,10 @@ public class MainActivity extends AppCompatActivity {
                     number.setText("");
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
+
+                } catch (ActivityNotFoundException e) {
+                    L.alert(MainActivity.this, getString(R.string.need_browser));
+
                 }
                 startActivity( browse );
             }
@@ -79,8 +94,19 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.navigation_about:
 
+                        String design;
+                        String lang = Locale.getDefault().getLanguage();
+
+                        if (lang.equals("ja")) {
+                            design = "作成者: ";
+                        } else if (lang.equals("zh")) {
+                            design = "作者: ";
+                        } else {
+                            design = "Designed by";
+                        }
+
                         AlertDialog b = new AlertDialog.Builder(MainActivity.this).setMessage( Html.fromHtml("<h2>WhatsAdd</h2>" +
-                                "Designed by LouisLam &copy; 2017<br><br>" +
+                                design + " LouisLam &copy; 2017<br><br>" +
                                 "Twitter: <a href=\"https://twitter.com/LouisLam\">@LouisLam</a><br/><br/>" +
                                 "<a href=\"https://louislam.net\">https://louislam.net</a>")).create();
                         b.show();

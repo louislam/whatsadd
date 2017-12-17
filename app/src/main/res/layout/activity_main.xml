@@ -71,7 +71,7 @@
                     android:layout_marginStart="7dp"
                     android:background="@drawable/edittext"
                     android:ems="10"
-                    android:hint="Area"
+                    android:hint="@string/area"
                     android:inputType="number"
                     android:maxLength="3"
                     android:padding="10dp" />
@@ -92,7 +92,7 @@
                     android:layout_toStartOf="@+id/button"
                     android:background="@drawable/edittext"
                     android:ems="10"
-                    android:hint="Phone Number"
+                    android:hint="@string/phone_number"
                     android:inputType="number"
                     android:padding="10dp" />
 
@@ -106,7 +106,7 @@
                     android:layout_marginEnd="11dp"
                     android:layout_marginRight="11dp"
                     android:background="@drawable/ripple"
-                    android:contentDescription="Send"
+                    android:contentDescription="@string/send"
                     android:src="@drawable/ic_action_send" />
 
             </RelativeLayout>
@@ -123,7 +123,7 @@
             android:layout_marginLeft="9dp"
             android:layout_marginStart="9dp"
             android:layout_marginTop="56dp"
-            android:text="WhatsAdd"
+            android:text="@string/title_activity_main"
             android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
             android:textSize="40sp" />
 
