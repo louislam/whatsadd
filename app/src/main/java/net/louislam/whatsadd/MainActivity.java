@@ -15,6 +15,7 @@ import android.text.Html;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -43,6 +44,29 @@ public class MainActivity extends AppCompatActivity {
         final EditText areaCode = (EditText) findViewById(R.id.areaCode);
         final EditText number = (EditText) findViewById(R.id.number);
         ImageButton button = (ImageButton) findViewById(R.id.button);
+
+        number.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+                if(keyCode == KeyEvent.KEYCODE_DEL && number.getText().length() == 0) {
+                    areaCode.requestFocus();
+                    areaCode.setSelection(areaCode.getText().length());
+                }
+                return false;
+            }
+        });
+
+        areaCode.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.v("key code", keyCode + "");
+                if (areaCode.getText().length() == 3 && keyCode != KeyEvent.KEYCODE_DEL) {
+                    number.requestFocus();
+                }
+                return false;
+            }
+        });
 
         String areaCodeDefault = L.getString(MainActivity.this, "areaCode");
 
@@ -74,14 +98,17 @@ public class MainActivity extends AppCompatActivity {
                     browse = new Intent( Intent.ACTION_VIEW , Uri.parse(url));
                     L.storeString(MainActivity.this, "areaCode", areaCodeString);
                     number.setText("");
+                    startActivity( browse );
+
+
                 } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
+                    L.alert(MainActivity.this, "");
 
                 } catch (ActivityNotFoundException e) {
                     L.alert(MainActivity.this, getString(R.string.need_browser));
 
                 }
-                startActivity( browse );
+
             }
         });
 
