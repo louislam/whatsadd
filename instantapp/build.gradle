@@ -1,0 +1,18 @@
+apply plugin: 'com.android.instantapp'
+
+android {
+    buildToolsVersion '27.0.3'
+    compileSdkVersion 26
+    defaultConfig {
+        versionCode 6
+        versionName '1.4'
+        minSdkVersion 17
+        targetSdkVersion 26
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    implementation project(':app-base')
+}
