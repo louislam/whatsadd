@@ -9,3 +9,6 @@
 .externalNativeBuild
 /.idea
 *.apkx
+release/
+.idea
+app-base/
