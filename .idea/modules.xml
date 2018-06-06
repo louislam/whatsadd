@@ -4,7 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/WhatsAdd.iml" filepath="$PROJECT_DIR$/WhatsAdd.iml" />
       <module fileurl="file://$PROJECT_DIR$/app-base/app-base.iml" filepath="$PROJECT_DIR$/app-base/app-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app-base/app-base.iml" filepath="$PROJECT_DIR$/app-base/app-base.iml" />
       <module fileurl="file://$PROJECT_DIR$/appapk/appapk.iml" filepath="$PROJECT_DIR$/appapk/appapk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/appapk/appapk.iml" filepath="$PROJECT_DIR$/appapk/appapk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/instantapp/instantapp.iml" filepath="$PROJECT_DIR$/instantapp/instantapp.iml" />
       <module fileurl="file://$PROJECT_DIR$/instantapp/instantapp.iml" filepath="$PROJECT_DIR$/instantapp/instantapp.iml" />
     </modules>
   </component>
