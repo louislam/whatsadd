@@ -1,33 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources >
+<resources>
     <string name="app_name">WhatsAdd</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_activity_scrolling">ScrollingActivity</string>
-    <string name="large_text">
-    </string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_login">Sign in</string>
-
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-    <string name="title_activity_main">WhatsAdd</string>
-    <string name="title_activity_nav">NavActivity</string>
+    <string name="action_settings">設定</string>
     <string name="area">區號</string>
     <string name="phone_number">輸入電話號碼</string>
     <string name="send">Send</string>
     <string name="about">關於</string>
     <string name="add">加入</string>
     <string name="need_browser">No browser is installed.</string>
+    <string name="no_whatsapp">找不到 WhatsApp，請先安裝</string>
+    <string name="always_ask">每次詢問</string>
+    <string name="app_not_installed">未安裝此程式</string>
+    <string name="please_input">請輸入電話號碼及區號</string>
 </resources>
