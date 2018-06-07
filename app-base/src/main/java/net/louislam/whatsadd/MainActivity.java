@@ -45,15 +45,15 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
         //L.alert(this, Locale.getDefault().getDisplayLanguage());
 
-        areaCode = (EditText) findViewById(R.id.areaCode);
-        number = (EditText) findViewById(R.id.number);
-        ImageButton button = (ImageButton) findViewById(R.id.button);
+        areaCode = findViewById(R.id.areaCode);
+        number = findViewById(R.id.number);
+        ImageButton button = findViewById(R.id.button);
 
         number.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent browse = null;
 
                 try {
                     //String url = "https://api.whatsapp.com/send?phone=" + URLEncoder.encode(areaCodeString + numberString, "utf-8");
@@ -140,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
             }
         });
 
-        BottomNavigationView nav = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView nav = findViewById(R.id.navigation);
 
         nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -151,12 +150,16 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 String design;
                 String lang = Locale.getDefault().getLanguage();
 
-                if (lang.equals("ja")) {
-                    design = "作成者: ";
-                } else if (lang.equals("zh")) {
-                    design = "作者: ";
-                } else {
-                    design = "Designed by";
+                switch (lang) {
+                    case "ja":
+                        design = "作成者: ";
+                        break;
+                    case "zh":
+                        design = "作者: ";
+                        break;
+                    default:
+                        design = "Designed by";
+                        break;
                 }
 
                 AlertDialog b = new AlertDialog.Builder(MainActivity.this).setMessage(Html.fromHtml("<h2>WhatsAdd</h2>" +
