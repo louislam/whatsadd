@@ -12,4 +12,6 @@
     <string name="always_ask">Always ask</string>
     <string name="app_not_installed">This app is not installed.</string>
     <string name="please_input">Please input the area code and phone number.</string>
+    <string name="default_app">Default App</string>
+    <string name="choose_app">Choose App</string>
 </resources>

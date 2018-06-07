@@ -12,4 +12,6 @@
     <string name="always_ask">每次詢問</string>
     <string name="app_not_installed">未安裝此程式</string>
     <string name="please_input">請輸入電話號碼及區號</string>
+    <string name="default_app">預設程式</string>
+    <string name="choose_app">選擇程式</string>
 </resources>

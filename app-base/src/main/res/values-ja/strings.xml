@@ -8,8 +8,10 @@
     <string name="about">アボート</string>
     <string name="add">ホーム</string>
     <string name="need_browser">No browser is installed.</string>
-    <string name="no_whatsapp">Whatsapp がありません</string>
+    <string name="no_whatsapp">WhatsApp がありません</string>
     <string name="always_ask">每回尋ねる</string>
     <string name="app_not_installed">このアプリがありません</string>
     <string name="please_input">国番号と電話番号を入力してください</string>
+    <string name="default_app">デフォルトアプリ</string>
+    <string name="choose_app">アプリを選択します</string>
 </resources>

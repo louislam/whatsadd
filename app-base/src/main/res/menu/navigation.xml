@@ -7,6 +7,11 @@
         android:title="@string/add" />
 
     <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/ic_action_settings"
+        android:title="@string/action_settings" />
+
+    <item
         android:id="@+id/navigation_about"
         android:icon="@drawable/ic_action_help"
         android:title="@string/about" />
