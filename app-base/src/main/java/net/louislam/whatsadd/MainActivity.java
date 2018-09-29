@@ -31,7 +31,7 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements DialogInterface.OnClickListener{
+public abstract class MainActivity extends AppCompatActivity implements DialogInterface.OnClickListener{
 
     protected AlertDialog settingDialog;
     protected AlertDialog askDialog;
@@ -185,56 +185,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
 
     }
 
-    public void openWhatsApp(String packageName) {
-        String areaCodeString = areaCode.getText().toString().trim();
-        String numberString = number.getText().toString().trim();
-
-        try {
-            if ( areaCodeString.equals("") || numberString.equals("")) {
-                Toast.makeText(MainActivity.this, R.string.please_input,
-                        Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            L.storeString(MainActivity.this, "areaCode", areaCodeString);
-            number.setText("");
-
-            Intent intent = new Intent();
-            intent.setComponent(new ComponentName(packageName, "com.whatsapp.TextAndDirectChatDeepLink"));
-            String url = "https://api.whatsapp.com/send?phone=" + URLEncoder.encode(areaCodeString + numberString, "utf-8");
-            Uri uri = Uri.parse(url);
-
-            intent.setData(uri);
-            startActivity(intent);
-
-        } catch (Exception ex) {
-            L.log(ex.toString());
-
-            try {
-                Intent browse;
-                String url = "https://api.whatsapp.com/send?phone=" + URLEncoder.encode(areaCodeString + numberString, "utf-8");
-                Log.v("URL", url);
-
-                browse = new Intent( Intent.ACTION_VIEW , Uri.parse(url));
-                L.storeString(MainActivity.this, "areaCode", areaCodeString);
-                number.setText("");
-                startActivity( browse );
-
-
-            } catch (UnsupportedEncodingException e) {
-                L.alert(MainActivity.this, "");
-
-            } catch (ActivityNotFoundException e) {
-                L.alert(MainActivity.this, getString(R.string.need_browser));
-
-            } catch (Exception e) {
-
-                L.alert(MainActivity.this, "Unable to find WhatsApp, please install first.");
-
-            }
-
-        }
-    }
+    public abstract void openWhatsApp(String packageName);
 
     public void openAskDialog() {
 

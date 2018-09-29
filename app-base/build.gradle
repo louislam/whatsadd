@@ -42,6 +42,7 @@ dependencies {
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation files('src/main/libs/louislam-lazy-library-1.1.jar')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.chootdev:timezago:1.1.8'
 }
 repositories {
     mavenCentral()
