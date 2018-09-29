@@ -16,4 +16,8 @@ class Phone(val areaCode : String, val number : String, val date : Date) {
         val timeAgo = TimeAgo().locale(c)
         return timeAgo.getTimeAgo(date)
     }
+
+    fun getFirstChar() : String {
+        return number.first().toString()
+    }
 }

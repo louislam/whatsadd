@@ -43,6 +43,8 @@ public abstract class MainActivity extends AppCompatActivity implements DialogIn
     protected EditText number;
     protected ImageButton button;
 
+    protected boolean again = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +64,15 @@ public abstract class MainActivity extends AppCompatActivity implements DialogIn
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
                 if(keyCode == KeyEvent.KEYCODE_DEL && number.getText().length() == 0) {
-                    areaCode.requestFocus();
-                    areaCode.setSelection(areaCode.getText().length());
+                    if (again) {
+                        areaCode.requestFocus();
+                        areaCode.setSelection(areaCode.getText().length());
+                        again = false;
+                    } else {
+                        again = true;
+                    }
+                } else {
+                    again = false;
                 }
                 return false;
             }

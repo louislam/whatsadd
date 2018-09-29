@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
@@ -31,6 +33,20 @@ class KotlinMainActivity : MainActivity() {
             true
         }
 
+        number.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                historyAdapter.filter(s!!)
+            }
+        })
+
         historyRecycleView.layoutManager = LinearLayoutManager(this)
 
         historyAdapter = HistoryAdapter(this)
@@ -47,9 +63,14 @@ class KotlinMainActivity : MainActivity() {
         itemTouchHelper.attachToRecyclerView(historyRecycleView)
     }
 
+
     override fun openWhatsApp(packageName: String) {
         val areaCodeString = areaCode.text.toString().trim { it <= ' ' }
         val numberString = number.text.toString().trim { it <= ' ' }
+        openWhatsApp(packageName, areaCodeString, numberString)
+    }
+
+    fun openWhatsApp(packageName: String, areaCodeString : String, numberString : String) {
         val url = "https://api.whatsapp.com/send?phone=" + URLEncoder.encode(areaCodeString + numberString, "utf-8")
         Log.v("URL", url)
 
@@ -93,4 +114,6 @@ class KotlinMainActivity : MainActivity() {
 
         historyAdapter.add(Phone(areaCodeString, numberString, Date()))
     }
+
+
 }
