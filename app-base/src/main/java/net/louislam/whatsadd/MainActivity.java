@@ -33,13 +33,15 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements DialogInterface.OnClickListener{
 
-    private AlertDialog settingDialog;
-    private AlertDialog askDialog;
+    protected AlertDialog settingDialog;
+    protected AlertDialog askDialog;
 
     public final static String WHATSAPP = "com.whatsapp";
     public final static String WHATSAPP_BUSINESS = "com.whatsapp.w4b";
-    private EditText areaCode;
-    private EditText number;
+
+    protected EditText areaCode;
+    protected EditText number;
+    protected ImageButton button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
 
         areaCode = findViewById(R.id.areaCode);
         number = findViewById(R.id.number);
-        ImageButton button = findViewById(R.id.button);
+        button = findViewById(R.id.button);
 
         number.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -163,9 +165,10 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 }
 
                 AlertDialog b = new AlertDialog.Builder(MainActivity.this).setMessage(Html.fromHtml("<h2>WhatsAdd</h2>" +
-                        design + " LouisLam &copy; 2017<br><br>" +
+                        design + " LouisLam &copy; 2017-2018<br><br>" +
                         "Twitter: <a href=\"https://twitter.com/LouisLam\">@LouisLam</a><br/><br/>" +
-                        "<a href=\"https://louislam.net/blog\">https://louislam.net</a>")).create();
+                        "<a href=\"https://louislam.net/blog/2018/01/whatsadd/\">https://louislam.net</a><br />" +
+                        "(Find me to translate the app to your language)")).create();
                 b.show();
 
                 ((TextView) b.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());

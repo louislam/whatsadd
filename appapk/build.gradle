@@ -9,7 +9,7 @@ android {
         versionName "1.4.2"
         targetSdkVersion 26
     }
-    buildToolsVersion '27.0.3'
+    buildToolsVersion '28.0.2'
     productFlavors {
     }
 }

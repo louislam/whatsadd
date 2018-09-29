@@ -40,14 +40,10 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginStart="15dp"
+            android:layout_marginEnd="13dp"
+            android:layout_marginStart="13dp"
             android:layout_marginTop="157dp"
             app:cardBackgroundColor="#FFFFFF"
             app:cardCornerRadius="2dp"
@@ -63,11 +59,9 @@
                     android:id="@+id/areaCode"
                     android:layout_width="60dp"
                     android:layout_height="50dp"
-                    android:layout_alignParentLeft="true"
-
+                    android:imeOptions="actionNext"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="7dp"
                     android:layout_marginStart="7dp"
                     android:background="@drawable/edittext"
                     android:ems="10"
@@ -78,7 +72,6 @@
 
                 <EditText
                     android:id="@+id/number"
-
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_alignBottom="@+id/areaCode"
@@ -87,8 +80,6 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginStart="10dp"
                     android:layout_toEndOf="@+id/areaCode"
-                    android:layout_toLeftOf="@+id/button"
-                    android:layout_toRightOf="@+id/areaCode"
                     android:layout_toStartOf="@+id/button"
                     android:background="@drawable/edittext"
                     android:ems="10"
@@ -101,10 +92,8 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
                     android:layout_alignTop="@+id/number"
                     android:layout_marginEnd="11dp"
-                    android:layout_marginRight="11dp"
                     android:background="@drawable/ripple"
                     android:contentDescription="@string/send"
                     android:src="@drawable/ic_action_send" />
@@ -117,16 +106,24 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/cardView"
             android:layout_alignParentTop="true"
             android:layout_alignStart="@+id/cardView"
-            android:layout_marginLeft="9dp"
             android:layout_marginStart="9dp"
             android:layout_marginTop="56dp"
             android:text="@string/app_name"
             android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
             android:textSize="40sp" />
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/historyRecycleView"
+            android:layout_width="383dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="228dp"
+            android:layout_marginEnd="13dp"
+            android:layout_marginBottom="60dp" />
 
     </RelativeLayout>
 

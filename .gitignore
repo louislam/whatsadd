@@ -11,5 +11,4 @@
 *.apkx
 release/
 .idea
-app-base/
 */build/
