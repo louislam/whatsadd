@@ -7,7 +7,7 @@
     <TextView
         android:id="@+id/historyItem"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="180dp"
         android:paddingStart="20dp"
         android:paddingTop="5dp"
         android:paddingBottom="10dp"

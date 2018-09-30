@@ -4,6 +4,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.history_item.view.*
 import net.louislam.android.LStorage
@@ -22,6 +24,8 @@ class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Ada
 
     private val items : MapArrayList<String, Phone>
     private val gson = Gson()
+
+    var spaceView : TextView? = null;
 
     init {
         val listType = object : TypeToken<MapArrayList<String, Phone>>() {}.type
@@ -92,6 +96,11 @@ class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Ada
         }
 
         val view = LayoutInflater.from(context).inflate(layout, parent, false);
+
+        if (viewType == SPACE) {
+            spaceView = view.historyItem as TextView
+        }
+
         val viewHolder = ViewHolder(view)
 
         return viewHolder;

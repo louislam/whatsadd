@@ -2,6 +2,7 @@ package net.louislam.whatsadd
 
 import android.content.ActivityNotFoundException
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,12 +11,17 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.DisplayMetrics
 import android.util.Log
+import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.AbsListView
+import android.widget.RelativeLayout
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import net.louislam.android.L
 import java.io.UnsupportedEncodingException
+import java.lang.Thread.sleep
 import java.net.URLEncoder
 import java.util.*
 
@@ -42,6 +48,40 @@ class KotlinMainActivity : MainActivity() {
         })
 
         historyRecycleView.layoutManager = LinearLayoutManager(this)
+        historyRecycleView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, scrollState: Int) {
+                L.log("Scroll Status: $scrollState")
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                L.log("Scroll (dx,dy): ($dx,$dy)")
+
+                var fixedDY : Float;
+
+                var max = convertDpToPixel(-140F, this@KotlinMainActivity);
+
+                if (toolbar.translationY - dy < max) {
+                    fixedDY = max;
+                } else if (toolbar.translationY - dy > 0) {
+                    fixedDY = 0F;
+                } else {
+                    fixedDY = toolbar.translationY - dy;
+                }
+
+                toolbar.translationY = fixedDY
+                titleView.translationY = fixedDY
+                cardView.translationY = fixedDY
+              //  historyAdapter.spaceView!!.height = 1000
+
+          //      val layoutParams = historyRecycleView.layoutParams as RelativeLayout.LayoutParams
+       //         layoutParams.topMargin = fixedDY.toInt() + convertDpToPixel(180F, this@KotlinMainActivity).toInt();
+          //      historyRecycleView.layoutParams = layoutParams
+                L.log("Toolbar Scroll: ${toolbar.translationY }")
+                L.log("Space Scroll: ${historyAdapter.spaceView!!.height}")
+                val topMargin = (historyRecycleView.layoutParams as RelativeLayout.LayoutParams).topMargin;
+                L.log("HistoryView Scroll: ${topMargin}")
+            }
+        })
 
         historyAdapter = HistoryAdapter(this)
         historyRecycleView.adapter = historyAdapter
@@ -56,6 +96,14 @@ class KotlinMainActivity : MainActivity() {
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(historyRecycleView)
 
+    }
+
+    fun convertDpToPixel(dp: Float, context: Context): Float {
+        return dp * (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
+    }
+
+    fun convertPixelsToDp(px: Float, context: Context): Float {
+        return px / (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
     }
 
     private fun test() {
