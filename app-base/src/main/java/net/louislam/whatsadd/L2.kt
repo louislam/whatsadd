@@ -44,7 +44,9 @@ class L2 {
                                 whichButton: Int) {
                             val value = input.getText()
                                     .toString()
-                            okListener.invoke(value)
+
+                            if (value != "")        
+                                okListener.invoke(value)
                         }
                     })
 
