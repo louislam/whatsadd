@@ -144,6 +144,7 @@ public abstract class MainActivity extends AppCompatActivity implements DialogIn
                     L.alert(MainActivity.this, getString(R.string.need_browser));
 
                 } catch (Exception e) {
+                    e.printStackTrace();
                     L.alert(MainActivity.this, getString(R.string.no_whatsapp));
 
                 }
@@ -162,7 +163,7 @@ public abstract class MainActivity extends AppCompatActivity implements DialogIn
                 String design;
                 String lang = Locale.getDefault().getLanguage();
 
-                String version = "(" + L.getAppVersion(MainActivity.this) + ")";
+                String version = "(" + L.getAppVersion(MainActivity.this) + ") ";
 
                 switch (lang) {
                     case "ja":
@@ -179,8 +180,8 @@ public abstract class MainActivity extends AppCompatActivity implements DialogIn
                 AlertDialog b = new AlertDialog.Builder(MainActivity.this).setMessage(Html.fromHtml("<h2>WhatsAdd</h2>" +
                         version + design + " LouisLam &copy; 2017-2018<br><br>" +
                         "Twitter: <a href=\"https://twitter.com/LouisLam\">@LouisLam</a><br/><br/>" +
-                        "<a href=\"https://louislam.net/blog/2018/01/whatsadd/\">https://louislam.net</a><br />" +
-                        "(Find me to translate the app to your language)")).create();
+                        "<a href=\"https://louislam.net/blog/2018/01/whatsadd/\">https://louislam.net</a><br /><br/>" +
+                        "(Find me to translate the app into your language)")).create();
                 b.show();
 
                 ((TextView) b.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());

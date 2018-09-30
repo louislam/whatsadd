@@ -17,26 +17,25 @@ class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Ada
     companion object {
         const val SPACE = 0
         const val ITEM = 1
+        const val STORE_NAME = "historyMap5"
     }
 
-    private var displayItems : ArrayList<Phone> = ArrayList()
-    private val items : ArrayList<Phone>
+    private val items : MapArrayList<String, Phone>
     private val gson = Gson()
 
     init {
-        val listType = object : TypeToken<ArrayList<Phone>>() {}.type
-        val json = LStorage.getString(context, "history");
+        val listType = object : TypeToken<MapArrayList<String, Phone>>() {}.type
+        val json = LStorage.getString(context, STORE_NAME);
 
         setHasStableIds(true)
 
         if (json == null) {
-            items = ArrayList()
-            items.add(Phone("", "", Date()))
+            items = MapArrayList()
+            val emptyPhone = Phone("", "", Date())
+            items.add(0, emptyPhone.getFullPhone(), emptyPhone)
         } else {
             items = gson.fromJson(json, listType);
         }
-
-        displayItems.addAll(items);
     }
 
     /**
@@ -47,8 +46,18 @@ class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Ada
     }
 
     fun add(phone : Phone, notify : Boolean) {
-        items.add(1, phone)
-        displayItems.add(1, phone)
+        val targetPhone : Phone;
+
+        val foundPhone : Phone? = items.remove(phone.getFullPhone())
+
+        // if found, bring to the top
+        if (foundPhone != null) {
+            targetPhone = foundPhone
+        } else {
+            targetPhone = phone
+        }
+
+        items.add(1, targetPhone.getFullPhone(), targetPhone)
 
         if (notify) {
             this.notifyItemInserted(1);
@@ -57,12 +66,14 @@ class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Ada
         save();
     }
 
+
+
     override fun getItemId(position: Int): Long {
-        return displayItems[position].hashCode().toLong()
+        return items.get(position)!!.hashCode().toLong()
     }
 
     override fun getItemCount(): Int {
-        return displayItems.size
+        return items.getSize()
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -87,7 +98,7 @@ class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Ada
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (holder.itemViewType == ITEM) {
-            val phone : Phone = displayItems[position]
+            val phone : Phone = items.get(position)!!
 
             holder.itemView.historyItem.text = phone.toString()
             holder.itemView.dateView.text = phone.getTimeAgo(context)
@@ -100,11 +111,11 @@ class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Ada
             }
 
             holder.itemView.setOnLongClickListener {
-                L2.inputDialog2(context, context.getString(R.string.input_alias) + phone.getFullPhone() + ":") { alias ->
+                L2.inputDialog2(context, context.getString(R.string.input_alias) + phone.getFullPhone() + ":", { alias ->
                     phone.alias = alias
                     notifyItemChanged(position)
                     save()
-                }
+                }, phone.alias)
 
                 true
             }
@@ -113,26 +124,28 @@ class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Ada
 
     fun removeAt(position: Int) {
         items.removeAt(position)
-        displayItems.removeAt(position)
         notifyItemRemoved(position)
         save();
     }
 
     fun save() {
-        L.storeString(context, "history", gson.toJson(items))
+        L.storeString(context, STORE_NAME, gson.toJson(items))
     }
 
     fun filter(keyword : CharSequence) {
-
         if (keyword != "") {
-            displayItems = items.filter { phone ->
-                phone.toString().contains(keyword) || phone.number == ""
-            } as ArrayList<Phone>
+            items.filter { key, phone ->
+                key.contains(keyword) || phone.number == ""
+            }
         } else {
-            displayItems = items;
+            items.clearFilter();
         }
 
         notifyDataSetChanged()
+    }
+
+    fun clearFilter() {
+        items.clearFilter()
     }
 
 }

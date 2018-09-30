@@ -56,8 +56,25 @@ class KotlinMainActivity : MainActivity() {
 
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(historyRecycleView)
+
     }
 
+    private fun test() {
+        Thread {
+            val date = Date()
+
+            // Test Data
+            for(i in 10000000 .. 10000520) {
+                date.time = date.time - 3600 * 12
+                historyAdapter.add(Phone("852", i.toString(), date), false)
+            }
+
+            runOnUiThread {
+                historyAdapter.notifyDataSetChanged()
+            }
+        }.start()
+
+    }
 
     override fun openWhatsApp(packageName: String) {
         val areaCodeString = areaCode.text.toString().trim { it <= ' ' }
@@ -95,6 +112,8 @@ class KotlinMainActivity : MainActivity() {
                 val browse: Intent  = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                 L.storeString(this@KotlinMainActivity, "areaCode", areaCodeString)
                 number.setText("")
+                historyAdapter.clearFilter();
+
                 startActivity(browse)
 
             } catch (e: UnsupportedEncodingException) {
@@ -109,6 +128,5 @@ class KotlinMainActivity : MainActivity() {
 
         historyAdapter.add(Phone(areaCodeString, numberString, Date()))
     }
-
 
 }
