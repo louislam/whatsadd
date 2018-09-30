@@ -34,6 +34,11 @@
             >
         </android.support.v7.widget.RecyclerView>
 
+        <!-- Setting -->
+        <include layout="@layout/setting_page" />
+
+
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -125,6 +130,7 @@
 
     </RelativeLayout>
 
+    <!-- Bottom Bar -->
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"

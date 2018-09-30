@@ -15,4 +15,7 @@
     <string name="default_app">Default App</string>
     <string name="choose_app">Choose App</string>
     <string name="input_alias">Alias name for </string>
+    <string name="no_preference">No Preference</string>
+    <string name="default_whatsapp">Default Whatsapp</string>
+    <string name="auto_show_keyboard">Auto Show Keyboard</string>
 </resources>

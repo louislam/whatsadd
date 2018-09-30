@@ -1,5 +1,8 @@
 package net.louislam.whatsadd
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
 import android.content.ActivityNotFoundException
 import android.content.ComponentName
 import android.content.Context
@@ -15,24 +18,25 @@ import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.AbsListView
-import android.widget.RelativeLayout
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.setting_page.*
 import net.louislam.android.L
 import java.io.UnsupportedEncodingException
-import java.lang.Thread.sleep
 import java.net.URLEncoder
 import java.util.*
 
 class KotlinMainActivity : MainActivity() {
     lateinit var historyAdapter : HistoryAdapter
-
+    var maxOffset : Float = 0F;
+    var currentPage = "add"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        settingView.visibility = View.GONE
 
+        maxOffset = convertDpToPixel(-140F, this@KotlinMainActivity);
 
         number.setOnEditorActionListener { _, actionID, _ ->
             if (actionID == EditorInfo.IME_ACTION_DONE) {
@@ -52,43 +56,33 @@ class KotlinMainActivity : MainActivity() {
         historyRecycleView.layoutManager = LinearLayoutManager(this)
         historyRecycleView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, scrollState: Int) {
-                L.log("Scroll Status: $scrollState")
-
-
+                //L.log("Scroll Status: $scrollState")
             }
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 L.log("Scroll (dx,dy): ($dx,$dy)")
 
-                var fixedDY : Float;
+                val fixedDY : Float;
 
-                var max = convertDpToPixel(-140F, this@KotlinMainActivity);
-
-                if (toolbar.translationY - dy < max) {
-                    fixedDY = max;
+                if (toolbar.translationY - dy < maxOffset) {
+                    fixedDY = maxOffset;
                 } else if (toolbar.translationY - dy > 0) {
                     fixedDY = 0F;
                 } else {
                     fixedDY = toolbar.translationY - dy;
                 }
 
-                toolbar.translationY = fixedDY
-                titleView.translationY = fixedDY
-                cardView.translationY = fixedDY
-              //  historyAdapter.spaceView!!.height = 1000
-
-          //      val layoutParams = historyRecycleView.layoutParams as RelativeLayout.LayoutParams
-       //         layoutParams.topMargin = fixedDY.toInt() + convertDpToPixel(180F, this@KotlinMainActivity).toInt();
-          //      historyRecycleView.layoutParams = layoutParams
-                L.log("Toolbar Scroll: ${toolbar.translationY }")
-                val topMargin = (historyRecycleView.layoutParams as RelativeLayout.LayoutParams).topMargin;
-                L.log("HistoryView Scroll: ${topMargin}")
+                setHeaderOffset(fixedDY)
+                //L.log("Toolbar Scroll: ${toolbar.translationY }")
+                //val topMargin = (historyRecycleView.layoutParams as RelativeLayout.LayoutParams).topMargin;
+                //L.log("HistoryView Scroll: ${topMargin}")
             }
         })
 
         historyRecycleView.addOnLayoutChangeListener{ view: View, i: Int, i1: Int, i2: Int, i3: Int, i4: Int, i5: Int, i6: Int, i7: Int ->
-            if (historyAdapter.itemCount <= 5)
+            if (historyAdapter.itemCount <= 5 && currentPage == "add") {
                 resetPosition()
+            }
         }
 
         historyAdapter = HistoryAdapter(this)
@@ -104,12 +98,55 @@ class KotlinMainActivity : MainActivity() {
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(historyRecycleView)
 
+        settingView.animate().setListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator?) {
+                super.onAnimationEnd(animation)
+                if (currentPage == "add") {
+                    settingView.visibility = View.GONE
+                }
+            }
+        });
+
+        defaultWhatsappButton.setOnClickListener {
+            showDefaultWhatsappDialog()
+        }
+    }
+
+    fun setHeaderOffset(value : Float) {
+        toolbar.translationY = value
+        titleView.translationY = value
+        cardView.translationY = value
+    }
+
+    fun setHeaderOffsetWithAnimation(value : Float) {
+        val time = 200L
+        ObjectAnimator.ofFloat(toolbar, "translationY", value).setDuration(time).start()
+        ObjectAnimator.ofFloat(titleView, "translationY", value).setDuration(time).start()
+        ObjectAnimator.ofFloat(cardView, "translationY", value).setDuration(time).start()
     }
 
     fun resetPosition() {
-        toolbar.translationY = 0F
-        titleView.translationY = 0F
-        cardView.translationY = 0F
+        setHeaderOffsetWithAnimation(0F)
+    }
+
+    override fun openSettingPage() {
+        currentPage = "setting"
+        MainActivity.hideKeyboard(this)
+        setHeaderOffsetWithAnimation(maxOffset)
+        settingView.visibility = View.VISIBLE
+
+        settingView.animate()
+                .alpha(1f)
+                .setDuration(200)
+    }
+
+    override fun openAddPage() {
+        currentPage = "add"
+        setHeaderOffsetWithAnimation(0F)
+
+        settingView.animate()
+            .alpha(0.0f)
+            .setDuration(200)
     }
 
     fun convertDpToPixel(dp: Float, context: Context): Float {
@@ -136,6 +173,8 @@ class KotlinMainActivity : MainActivity() {
         }.start()
 
     }
+
+
 
     override fun openWhatsApp(packageName: String) {
         val areaCodeString = areaCode.text.toString().trim { it <= ' ' }

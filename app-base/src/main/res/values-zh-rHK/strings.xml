@@ -15,4 +15,7 @@
     <string name="default_app">預設程式</string>
     <string name="choose_app">選擇程式</string>
     <string name="input_alias">輸入別名 </string>
+    <string name="no_preference">No Preference</string>
+    <string name="default_whatsapp">預設 Whatsapp</string>
+    <string name="auto_show_keyboard">自動打開鍵盤</string>
 </resources>

@@ -15,4 +15,7 @@
     <string name="default_app">デフォルトアプリ</string>
     <string name="choose_app">アプリを選択します</string>
     <string name="input_alias">別称を入力 </string>
+    <string name="no_preference">No Preference</string>
+    <string name="default_whatsapp">デフォルト Whatsapp</string>
+    <string name="auto_show_keyboard">Auto Hide Keyboard</string>
 </resources>
