@@ -5,8 +5,8 @@ android {
     defaultConfig {
         applicationId "net.louislam.whatsadd"
         minSdkVersion 17
-        versionCode 9
-        versionName "1.4.2"
+        versionCode 10
+        versionName "1.5.0"
         targetSdkVersion 26
     }
     buildToolsVersion '28.0.2'
