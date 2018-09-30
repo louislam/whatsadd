@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import net.louislam.android.L
 import java.io.UnsupportedEncodingException
 import java.net.URLEncoder
-import java.time.LocalDate
 import java.util.*
 
 class KotlinMainActivity : MainActivity() {

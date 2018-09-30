@@ -53,6 +53,7 @@ class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Ada
         // if found, bring to the top
         if (foundPhone != null) {
             targetPhone = foundPhone
+            targetPhone.date = phone.date
         } else {
             targetPhone = phone
         }
