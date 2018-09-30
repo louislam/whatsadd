@@ -26,11 +26,13 @@ import java.net.URLEncoder
 import java.util.*
 
 class KotlinMainActivity : MainActivity() {
-
     lateinit var historyAdapter : HistoryAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
 
         number.setOnEditorActionListener { _, actionID, _ ->
             if (actionID == EditorInfo.IME_ACTION_DONE) {
@@ -51,6 +53,8 @@ class KotlinMainActivity : MainActivity() {
         historyRecycleView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, scrollState: Int) {
                 L.log("Scroll Status: $scrollState")
+
+
             }
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -77,11 +81,15 @@ class KotlinMainActivity : MainActivity() {
        //         layoutParams.topMargin = fixedDY.toInt() + convertDpToPixel(180F, this@KotlinMainActivity).toInt();
           //      historyRecycleView.layoutParams = layoutParams
                 L.log("Toolbar Scroll: ${toolbar.translationY }")
-                L.log("Space Scroll: ${historyAdapter.spaceView!!.height}")
                 val topMargin = (historyRecycleView.layoutParams as RelativeLayout.LayoutParams).topMargin;
                 L.log("HistoryView Scroll: ${topMargin}")
             }
         })
+
+        historyRecycleView.addOnLayoutChangeListener{ view: View, i: Int, i1: Int, i2: Int, i3: Int, i4: Int, i5: Int, i6: Int, i7: Int ->
+            if (historyAdapter.itemCount <= 5)
+                resetPosition()
+        }
 
         historyAdapter = HistoryAdapter(this)
         historyRecycleView.adapter = historyAdapter
@@ -96,6 +104,12 @@ class KotlinMainActivity : MainActivity() {
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(historyRecycleView)
 
+    }
+
+    fun resetPosition() {
+        toolbar.translationY = 0F
+        titleView.translationY = 0F
+        cardView.translationY = 0F
     }
 
     fun convertDpToPixel(dp: Float, context: Context): Float {

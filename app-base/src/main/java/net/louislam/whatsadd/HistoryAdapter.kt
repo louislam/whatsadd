@@ -25,8 +25,6 @@ class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Ada
     private val items : MapArrayList<String, Phone>
     private val gson = Gson()
 
-    var spaceView : TextView? = null;
-
     init {
         val listType = object : TypeToken<MapArrayList<String, Phone>>() {}.type
         val json = LStorage.getString(context, STORE_NAME);
@@ -96,13 +94,7 @@ class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Ada
         }
 
         val view = LayoutInflater.from(context).inflate(layout, parent, false);
-
-        if (viewType == SPACE) {
-            spaceView = view.historyItem as TextView
-        }
-
         val viewHolder = ViewHolder(view)
-
         return viewHolder;
     }
 
