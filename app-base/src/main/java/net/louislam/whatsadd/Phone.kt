@@ -8,7 +8,17 @@ import com.choota.dev.ctimeago.TimeAgo
 
 class Phone(val areaCode : String, val number : String, val date : Date) {
 
+    var alias : String? = null
+
     override fun toString(): String {
+        if (alias != null) {
+            return alias!!
+        } else {
+            return getFullPhone()
+        }
+    }
+
+    fun getFullPhone() : String {
         return "($areaCode) $number"
     }
 

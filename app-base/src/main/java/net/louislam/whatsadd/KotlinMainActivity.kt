@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import net.louislam.android.L
 import java.io.UnsupportedEncodingException
 import java.net.URLEncoder
+import java.time.LocalDate
 import java.util.*
 
 class KotlinMainActivity : MainActivity() {
@@ -34,14 +35,8 @@ class KotlinMainActivity : MainActivity() {
         }
 
         number.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {
-
-            }
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
+            override fun afterTextChanged(p0: Editable?) {}
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 historyAdapter.filter(s!!)
             }

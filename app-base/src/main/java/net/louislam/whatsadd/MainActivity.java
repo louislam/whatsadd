@@ -24,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.louislam.android.InputListener;
 import net.louislam.android.L;
 
 import java.io.UnsupportedEncodingException;
@@ -161,6 +162,8 @@ public abstract class MainActivity extends AppCompatActivity implements DialogIn
                 String design;
                 String lang = Locale.getDefault().getLanguage();
 
+                String version = "(" + L.getAppVersion(MainActivity.this) + ")";
+
                 switch (lang) {
                     case "ja":
                         design = "作成者: ";
@@ -174,7 +177,7 @@ public abstract class MainActivity extends AppCompatActivity implements DialogIn
                 }
 
                 AlertDialog b = new AlertDialog.Builder(MainActivity.this).setMessage(Html.fromHtml("<h2>WhatsAdd</h2>" +
-                        design + " LouisLam &copy; 2017-2018<br><br>" +
+                        version + design + " LouisLam &copy; 2017-2018<br><br>" +
                         "Twitter: <a href=\"https://twitter.com/LouisLam\">@LouisLam</a><br/><br/>" +
                         "<a href=\"https://louislam.net/blog/2018/01/whatsadd/\">https://louislam.net</a><br />" +
                         "(Find me to translate the app to your language)")).create();

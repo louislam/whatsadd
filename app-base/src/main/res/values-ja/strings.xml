@@ -14,4 +14,5 @@
     <string name="please_input">国番号と電話番号を入力してください</string>
     <string name="default_app">デフォルトアプリ</string>
     <string name="choose_app">アプリを選択します</string>
+    <string name="input_alias">別称を入力 </string>
 </resources>

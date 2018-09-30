@@ -14,4 +14,5 @@
     <string name="please_input">請輸入電話號碼及區號</string>
     <string name="default_app">預設程式</string>
     <string name="choose_app">選擇程式</string>
+    <string name="input_alias">輸入別名 </string>
 </resources>

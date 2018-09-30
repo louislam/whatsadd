@@ -1,6 +1,5 @@
 package net.louislam.whatsadd
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -44,10 +43,17 @@ class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Ada
      * Add a item
      */
     fun add(phone : Phone) {
+        add(phone, true)
+    }
+
+    fun add(phone : Phone, notify : Boolean) {
         items.add(1, phone)
         displayItems.add(1, phone)
 
-        this.notifyItemInserted(1);
+        if (notify) {
+            this.notifyItemInserted(1);
+        }
+
         save();
     }
 
@@ -91,6 +97,16 @@ class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Ada
                 context.number.setText(phone.number)
                 context.areaCode.setText(phone.areaCode)
                 context.button.performClick()
+            }
+
+            holder.itemView.setOnLongClickListener {
+                L2.inputDialog2(context, context.getString(R.string.input_alias) + phone.getFullPhone() + ":") { alias ->
+                    phone.alias = alias
+                    notifyItemChanged(position)
+                    save()
+                }
+
+                true
             }
         }
     }
