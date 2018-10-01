@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     defaultConfig {
         applicationId "net.louislam.whatsadd"
         minSdkVersion 17
-        versionCode 11
-        versionName "1.5.1"
-        targetSdkVersion 26
+        versionCode 12
+        versionName "1.5.2"
+        targetSdkVersion 27
     }
     buildToolsVersion '28.0.2'
     productFlavors {

@@ -14,8 +14,7 @@ import com.google.gson.reflect.TypeToken
 import net.louislam.android.L
 import kotlin.collections.ArrayList
 import com.google.gson.GsonBuilder
-
-
+import com.google.gson.JsonSyntaxException
 
 
 class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Adapter<ViewHolder>() {
@@ -25,7 +24,7 @@ class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Ada
         const val STORE_NAME = "historyMap5"
     }
 
-    private val items : MapArrayList<String, Phone>
+    private var items : MapArrayList<String, Phone>
     private val gson = GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
     init {
@@ -35,12 +34,21 @@ class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Ada
         setHasStableIds(true)
 
         if (json == null) {
-            items = MapArrayList()
-            val emptyPhone = Phone("", "", Date())
-            items.add(0, emptyPhone.getFullPhone(), emptyPhone)
+            items = initHistoryItems()
         } else {
-            items = gson.fromJson(json, listType);
+            try {
+                items = gson.fromJson(json, listType);
+            } catch (ex : JsonSyntaxException) {
+                items = initHistoryItems()
+            }
         }
+    }
+
+    private fun initHistoryItems() : MapArrayList<String, Phone> {
+        val items : MapArrayList<String, Phone> = MapArrayList()
+        val emptyPhone = Phone("", "", Date())
+        items.add(0, emptyPhone.getFullPhone(), emptyPhone)
+        return items
     }
 
     /**
