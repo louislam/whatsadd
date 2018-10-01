@@ -25,7 +25,7 @@ class Phone(val areaCode : String, val number : String, var date : Date) {
     }
 
     fun getFirstChar() : String {
-        if (alias != nul && alias.length != 0) {
+        if (alias != null && alias!!.length != 0) {
             return alias!!.first().toUpperCase().toString()
         } else if (number.length != 0) {
             return number.first().toString()

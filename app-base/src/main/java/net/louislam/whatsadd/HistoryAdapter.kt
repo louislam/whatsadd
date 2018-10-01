@@ -13,6 +13,9 @@ import java.util.*
 import com.google.gson.reflect.TypeToken
 import net.louislam.android.L
 import kotlin.collections.ArrayList
+import com.google.gson.GsonBuilder
+
+
 
 
 class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Adapter<ViewHolder>() {
@@ -23,7 +26,7 @@ class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Ada
     }
 
     private val items : MapArrayList<String, Phone>
-    private val gson = Gson()
+    private val gson = GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
     init {
         val listType = object : TypeToken<MapArrayList<String, Phone>>() {}.type
