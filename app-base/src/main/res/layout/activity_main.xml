@@ -31,6 +31,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="55dp"
+            android:background="?android:attr/colorBackground"
             >
         </android.support.v7.widget.RecyclerView>
 
@@ -43,7 +44,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:background="?attr/colorPrimary"
+            android:background="?attr/colorPrimaryDark"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         <!-- Input Box -->
@@ -51,13 +52,13 @@
             android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="13dp"
+            android:layout_alignParentEnd="true"
             android:layout_marginStart="13dp"
             android:layout_marginTop="150dp"
-            app:cardBackgroundColor="#FFFFFF"
+            android:layout_marginEnd="13dp"
+            app:cardBackgroundColor="?android:attr/colorBackground"
             app:cardCornerRadius="2dp"
             app:cardElevation="7dp">
 
@@ -71,13 +72,13 @@
                     android:id="@+id/areaCode"
                     android:layout_width="60dp"
                     android:layout_height="50dp"
-                    android:imeOptions="actionNext"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="7dp"
-                    android:background="@drawable/edittext"
+                    android:background="?android:attr/colorBackground"
                     android:ems="10"
                     android:hint="@string/area"
+                    android:imeOptions="actionNext"
                     android:inputType="number"
                     android:maxLength="3"
                     android:padding="10dp" />
@@ -85,18 +86,18 @@
                 <EditText
                     android:id="@+id/number"
                     android:layout_width="wrap_content"
-                    android:imeOptions="actionDone"
                     android:layout_height="50dp"
                     android:layout_alignBottom="@+id/areaCode"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_marginStart="10dp"
-                    android:layout_toEndOf="@+id/areaCode"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_toStartOf="@+id/button"
-                    android:background="@drawable/edittext"
+                    android:layout_toEndOf="@+id/areaCode"
+                    android:background="?android:attr/colorBackground"
                     android:ems="10"
                     android:hint="@string/phone_number"
+                    android:imeOptions="actionDone"
                     android:inputType="number"
                     android:padding="10dp" />
 
@@ -104,8 +105,8 @@
                     android:id="@+id/button"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_alignParentEnd="true"
                     android:layout_alignTop="@+id/number"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginEnd="11dp"
                     android:background="@drawable/ripple"
                     android:contentDescription="@string/send"
@@ -120,12 +121,12 @@
             android:id="@+id/titleView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_alignStart="@+id/cardView"
+            android:layout_alignParentTop="true"
             android:layout_marginStart="9dp"
             android:layout_marginTop="56dp"
             android:text="@string/app_name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+            android:textColor="@android:color/white"
             android:textSize="40sp" />
 
     </RelativeLayout>

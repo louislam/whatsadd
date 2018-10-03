@@ -3,10 +3,12 @@ package net.louislam.whatsadd
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
+import android.app.PendingIntent.getActivity
 import android.content.ActivityNotFoundException
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -18,10 +20,12 @@ import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.CompoundButton
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.setting_page.*
 import net.louislam.android.L
+import net.louislam.android.LStorage
 import java.io.UnsupportedEncodingException
 import java.net.URLEncoder
 import java.util.*
@@ -32,6 +36,9 @@ class KotlinMainActivity : MainActivity() {
     var currentPage = "add"
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val enableDarkTheme = LStorage.getBoolean(this, "enableDarkTheme")
+        enableDarkTheme(enableDarkTheme)
+
         super.onCreate(savedInstanceState)
 
         settingView.visibility = View.GONE
@@ -110,6 +117,23 @@ class KotlinMainActivity : MainActivity() {
         defaultWhatsappButton.setOnClickListener {
             showDefaultWhatsappDialog()
         }
+
+        darkThemeSwitch.isChecked = enableDarkTheme
+        darkThemeSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+            LStorage.store(this, "enableDarkTheme", isChecked)
+            recreate()
+        }
+    }
+
+    fun enableDarkTheme(enable : Boolean) {
+        Log.v("Theme", "Use Dark Theme: $enable")
+        val theme = super.getTheme();
+
+        if (enable) {
+            theme.applyStyle(R.style.DarkAppTheme, true);
+        } else {
+            theme.applyStyle(R.style.AppTheme, true);
+        }
     }
 
     fun setHeaderOffset(value : Float) {
@@ -173,8 +197,6 @@ class KotlinMainActivity : MainActivity() {
         }.start()
 
     }
-
-
 
     override fun openWhatsApp(packageName: String) {
         val areaCodeString = areaCode.text.toString().trim { it <= ' ' }

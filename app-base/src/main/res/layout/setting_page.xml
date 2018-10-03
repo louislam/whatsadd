@@ -7,7 +7,7 @@
     android:layout_marginTop="40dp"
     android:layout_marginEnd="0dp"
     android:layout_marginBottom="55dp"
-    android:background="@android:color/white"
+    android:background="?android:attr/colorBackground"
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical"
@@ -37,6 +37,28 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@drawable/ripple_rect"
+        android:clickable="true"
+        android:focusable="true"
+        >
+
+        <Switch
+            android:id="@+id/darkThemeSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:textSize="16dp"
+            android:layout_weight="1"
+            android:text="Enable Dark Theme" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/defaultWhatsappButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,7 +79,7 @@
             android:layout_marginEnd="25dp"
             android:layout_weight="1"
             android:text="@string/default_whatsapp"
-            android:textColor="@android:color/black"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="16dp" />
 
         <TextView
