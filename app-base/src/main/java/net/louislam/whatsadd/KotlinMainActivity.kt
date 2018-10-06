@@ -3,12 +3,10 @@ package net.louislam.whatsadd
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
-import android.app.PendingIntent.getActivity
 import android.content.ActivityNotFoundException
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -20,12 +18,12 @@ import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.CompoundButton
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.setting_page.*
 import net.louislam.android.L
 import net.louislam.android.LStorage
+import org.jetbrains.anko.*
 import java.io.UnsupportedEncodingException
 import java.net.URLEncoder
 import java.util.*
@@ -36,6 +34,7 @@ class KotlinMainActivity : MainActivity() {
     var currentPage = "add"
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val disableHistory = LStorage.getBoolean(this, "disableHistory")
         val enableDarkTheme = LStorage.getBoolean(this, "enableDarkTheme")
         enableDarkTheme(enableDarkTheme)
 
@@ -92,7 +91,7 @@ class KotlinMainActivity : MainActivity() {
             }
         }
 
-        historyAdapter = HistoryAdapter(this)
+        historyAdapter = HistoryAdapter(this, disableHistory)
         historyRecycleView.adapter = historyAdapter
 
         val swipeHandler = object : SwipeToDeleteCallback(this) {
@@ -121,8 +120,26 @@ class KotlinMainActivity : MainActivity() {
         darkThemeSwitch.isChecked = enableDarkTheme
         darkThemeSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
             LStorage.store(this, "enableDarkTheme", isChecked)
+            toast("Theme changed");
             recreate()
         }
+
+        clearAllHistoryButton.setOnClickListener { _ ->
+            alert("All history will be cleared", "Are you sure?") {
+                yesButton {
+                    historyAdapter.clear()
+                    toast("Cleared")
+                }
+                noButton { }
+            }.show()
+        }
+
+        disableHistorySwitch.isChecked = disableHistory
+        disableHistorySwitch.setOnCheckedChangeListener { _, isChecked ->
+            LStorage.store(this, "disableHistory", isChecked)
+            historyAdapter.disable = isChecked
+        }
+
     }
 
     fun enableDarkTheme(enable : Boolean) {

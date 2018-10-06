@@ -17,15 +17,24 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonSyntaxException
 
 
-class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Adapter<ViewHolder>() {
+class HistoryAdapter(private val context: KotlinMainActivity, disable : Boolean) : RecyclerView.Adapter<ViewHolder>() {
     companion object {
         const val SPACE = 0
         const val ITEM = 1
         const val STORE_NAME = "historyMap5"
     }
 
+    var disable = disable
+        set(value) {
+            field = value
+            if (value) {
+                clear()
+                notifyDataSetChanged()
+            }
+        }
     private var items : MapArrayList<String, Phone>
     private val gson = GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+
 
     init {
         val listType = object : TypeToken<MapArrayList<String, Phone>>() {}.type
@@ -51,6 +60,12 @@ class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Ada
         return items
     }
 
+    fun clear() {
+        items = initHistoryItems()
+        save()
+        notifyDataSetChanged();
+    }
+
     /**
      * Add a item
      */
@@ -59,6 +74,10 @@ class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Ada
     }
 
     fun add(phone : Phone, notify : Boolean) {
+        if (disable) {
+            return;
+        }
+
         val targetPhone : Phone;
 
         val foundPhone : Phone? = items.remove(phone.getFullPhone())
@@ -160,6 +179,7 @@ class HistoryAdapter(private val context: KotlinMainActivity) : RecyclerView.Ada
     fun clearFilter() {
         items.clearFilter()
     }
+
 
 }
 

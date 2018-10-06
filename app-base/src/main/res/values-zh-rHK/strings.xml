@@ -18,4 +18,7 @@
     <string name="no_preference">No Preference</string>
     <string name="default_whatsapp">預設 Whatsapp</string>
     <string name="auto_show_keyboard">自動打開鍵盤</string>
+    <string name="clear_all_history">清除歷史記錄</string>
+    <string name="enable_dark_theme">啟用黑色主題</string>
+    <string name="disable_history">關閉歷史記錄</string>
 </resources>

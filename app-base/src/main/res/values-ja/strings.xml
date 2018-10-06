@@ -18,4 +18,7 @@
     <string name="no_preference">No Preference</string>
     <string name="default_whatsapp">デフォルト Whatsapp</string>
     <string name="auto_show_keyboard">Auto Hide Keyboard</string>
+    <string name="clear_all_history">Clear all history</string>
+    <string name="enable_dark_theme">Enable Dark Theme</string>
+    <string name="disable_history">Disable History</string>
 </resources>
