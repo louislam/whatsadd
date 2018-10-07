@@ -15,10 +15,7 @@ android {
     compileSdkVersion 27
 
     defaultConfig {
-        minSdkVersion 17
-        targetSdkVersion 27
-        versionCode 14
-        versionName "1.7.0"
+
         //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         //vectorDrawables.useSupportLibrary = true
         //resConfigs "auto"
