@@ -27,7 +27,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue "string", "app_name", "WhatsAdd"
         }
+
+        debug {
+            resValue "string", "app_name", "WhatsAdd (Debug)"
+        }
+
     }
 }
 
@@ -46,6 +52,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation "org.jetbrains.anko:anko-commons:0.10.6"
     implementation "org.jetbrains.anko:anko-design:0.10.6"
+    implementation 'com.karumi:dexter:5.0.0'
 }
 repositories {
     mavenCentral()

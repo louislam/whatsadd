@@ -120,15 +120,15 @@ class KotlinMainActivity : MainActivity() {
         darkThemeSwitch.isChecked = enableDarkTheme
         darkThemeSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
             LStorage.store(this, "enableDarkTheme", isChecked)
-            toast("Theme changed");
+            toast(getString(R.string.theme_changed));
             recreate()
         }
 
         clearAllHistoryButton.setOnClickListener { _ ->
-            alert("All history will be cleared", "Are you sure?") {
+            alert(getString(R.string.history_clear_confirm_msg), getString(R.string.clear_all_history)) {
                 yesButton {
                     historyAdapter.clear()
-                    toast("Cleared")
+                    toast(getString(R.string.cleared))
                 }
                 noButton { }
             }.show()
@@ -136,11 +136,22 @@ class KotlinMainActivity : MainActivity() {
 
         disableHistorySwitch.isChecked = disableHistory
         disableHistorySwitch.setOnCheckedChangeListener { _, isChecked ->
-            LStorage.store(this, "disableHistory", isChecked)
-            historyAdapter.disable = isChecked
+            if (isChecked) {
+                alert(getString(R.string.history_clear_confirm_msg), getString(R.string.disable_history)) {
+                    yesButton {
+                        historyAdapter.disable = true
+                    }
+                    noButton {
+                        disableHistorySwitch.isChecked = false
+                    }
+                }.show().setCancelable(false)
+            } else {
+                historyAdapter.disable = false
+            }
         }
 
     }
+
 
     fun enableDarkTheme(enable : Boolean) {
         Log.v("Theme", "Use Dark Theme: $enable")

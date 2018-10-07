@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">WhatsAdd</string>
     <string name="action_settings">設定</string>
     <string name="area">區號</string>
     <string name="phone_number">輸入電話號碼</string>
@@ -21,4 +20,8 @@
     <string name="clear_all_history">清除歷史記錄</string>
     <string name="enable_dark_theme">啟用黑色主題</string>
     <string name="disable_history">關閉歷史記錄</string>
+    <string name="history_clear_confirm_msg">是否確認刪除歷史記錄?</string>
+    <string name="theme_changed">主題已變換</string>
+    <string name="are_you_sure">是否確認?</string>
+    <string name="cleared">已消除</string>
 </resources>

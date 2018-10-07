@@ -12,6 +12,12 @@ android {
     buildToolsVersion '28.0.2'
     productFlavors {
     }
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+        }
+    }
+
 }
 
 dependencies {

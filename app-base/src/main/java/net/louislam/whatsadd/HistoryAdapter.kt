@@ -27,11 +27,13 @@ class HistoryAdapter(private val context: KotlinMainActivity, disable : Boolean)
     var disable = disable
         set(value) {
             field = value
+            LStorage.store(context, "disableHistory", value)
             if (value) {
                 clear()
                 notifyDataSetChanged()
             }
         }
+
     private var items : MapArrayList<String, Phone>
     private val gson = GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
