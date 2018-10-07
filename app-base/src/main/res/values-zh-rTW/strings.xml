@@ -24,4 +24,6 @@
     <string name="theme_changed">主題已變換</string>
     <string name="are_you_sure">是否確認?</string>
     <string name="cleared">已消除</string>
+    <string name="export_history">匯出歷史記錄</string>
+    <string name="export_format">匯出格式</string>
 </resources>

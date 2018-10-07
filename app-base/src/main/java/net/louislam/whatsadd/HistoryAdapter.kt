@@ -4,17 +4,18 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.history_item.view.*
 import net.louislam.android.LStorage
 import java.util.*
 import com.google.gson.reflect.TypeToken
 import net.louislam.android.L
-import kotlin.collections.ArrayList
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonSyntaxException
+import java.io.File
+import java.nio.charset.Charset
+import com.opencsv.CSVWriter
+import java.io.FileOutputStream
+import java.io.OutputStreamWriter
 
 
 class HistoryAdapter(private val context: KotlinMainActivity, disable : Boolean) : RecyclerView.Adapter<ViewHolder>() {
@@ -40,7 +41,7 @@ class HistoryAdapter(private val context: KotlinMainActivity, disable : Boolean)
 
     init {
         val listType = object : TypeToken<MapArrayList<String, Phone>>() {}.type
-        val json = LStorage.getString(context, STORE_NAME);
+        val json = getJSON()
 
         setHasStableIds(true)
 
@@ -53,6 +54,10 @@ class HistoryAdapter(private val context: KotlinMainActivity, disable : Boolean)
                 items = initHistoryItems()
             }
         }
+    }
+
+    fun getJSON(): String? {
+        return LStorage.getString(context, STORE_NAME);
     }
 
     private fun initHistoryItems() : MapArrayList<String, Phone> {
@@ -182,7 +187,22 @@ class HistoryAdapter(private val context: KotlinMainActivity, disable : Boolean)
         items.clearFilter()
     }
 
+    fun saveCSV(file: File) {
+        val header = arrayOf("Area Code", "Number", "Date", "Alias")
 
+        FileOutputStream(file).use { fos ->
+            OutputStreamWriter(fos, Charset.forName("UTF-8")).use { osw ->
+                CSVWriter(osw).use { writer ->
+                    writer.writeNext(header)
+
+                    for((_, item) in items) {
+                        val row = arrayOf( item.areaCode, item.number, item.date.iso(), item.alias)
+                        writer.writeNext(row)
+                    }
+                }
+            }
+        }
+    }
 }
 
 class ViewHolder (view: View) : RecyclerView.ViewHolder(view)

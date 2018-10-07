@@ -24,4 +24,6 @@
     <string name="theme_changed">Theme changed</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="cleared">Cleared</string>
+    <string name="export_history">Export History</string>
+    <string name="export_format">Export Format</string>
 </resources>

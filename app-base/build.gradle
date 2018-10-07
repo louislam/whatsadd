@@ -52,7 +52,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation "org.jetbrains.anko:anko-commons:0.10.6"
     implementation "org.jetbrains.anko:anko-design:0.10.6"
-    implementation 'com.karumi:dexter:5.0.0'
+    implementation 'com.opencsv:opencsv:4.3'
 }
 repositories {
     mavenCentral()

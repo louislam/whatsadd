@@ -6,8 +6,8 @@ import android.content.DialogInterface
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.FrameLayout
-import android.widget.LinearLayout
-import net.louislam.android.InputListener
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class L2 {
@@ -56,4 +56,9 @@ class L2 {
     }
 
 
+}
+
+fun Date.iso() : String {
+    val sdf = SimpleDateFormat("yyyy-mm-dd HH:mm:ss")
+    return sdf.format(this)
 }

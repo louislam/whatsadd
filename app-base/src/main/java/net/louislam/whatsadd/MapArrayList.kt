@@ -10,6 +10,10 @@ class MapArrayList<K, V> {
 
     }
 
+    operator fun iterator() : MutableIterator<MutableMap.MutableEntry<K, V>> {
+        return hashMap.iterator()
+    }
+
     fun add(index: Int, key : K, element: V) {
         list.add(index, key)
 

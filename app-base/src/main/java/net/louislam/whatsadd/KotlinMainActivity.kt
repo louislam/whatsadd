@@ -19,13 +19,18 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.setting_page.*
 import net.louislam.android.L
 import net.louislam.android.LStorage
 import org.jetbrains.anko.*
+import org.json.JSONObject
+import java.io.File
 import java.io.UnsupportedEncodingException
 import java.net.URLEncoder
+import java.text.SimpleDateFormat
 import java.util.*
 
 class KotlinMainActivity : MainActivity() {
@@ -147,6 +152,48 @@ class KotlinMainActivity : MainActivity() {
                 }.show().setCancelable(false)
             } else {
                 historyAdapter.disable = false
+            }
+        }
+
+        exportButton.setOnClickListener {
+            val formats = listOf("CSV", "JSON")
+            selector(getString(R.string.export_format), formats) { _, i ->
+                val format = formats[i]
+
+                try {
+
+                    // Make Folder
+                    val file = getExternalFilesDir(null)
+                    val file2 = File(file, "export")
+                    var filename = ""
+                    file2.mkdirs()
+
+                    val sdf = SimpleDateFormat("yyyyMMdd-hhmmss")
+                    val date = sdf.format(Date())
+
+                    if (format == "JSON") {
+                        filename = "export-$date.json"
+                        val file3 = File(file2, filename)
+
+                        val rootObj = JSONObject(historyAdapter.getJSON()!!)
+
+                        val gson = GsonBuilder().setPrettyPrinting().create();
+                        val jp =  JsonParser();
+                        val je = jp.parse(rootObj.getJSONObject("hashMap").toString());
+                        file3.writeText(gson.toJson(je))
+
+
+                    } else if (format == "CSV") {
+                        filename = "export-$date.csv"
+                        val file3 = File(file2, filename)
+                        historyAdapter.saveCSV(file3)
+
+                    }
+
+                    longToast("Saved: ${filename}")
+                } catch (ex : java.lang.Exception) {
+                    alert("Cannot write file: ${ex.message}").show();
+                }
             }
         }
 
