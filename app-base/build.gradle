@@ -53,6 +53,7 @@ dependencies {
     implementation "org.jetbrains.anko:anko-commons:0.10.6"
     implementation "org.jetbrains.anko:anko-design:0.10.6"
     implementation 'com.opencsv:opencsv:4.3'
+    implementation 'com.zhy.base:fileprovider:1.0.0'
 }
 repositories {
     mavenCentral()

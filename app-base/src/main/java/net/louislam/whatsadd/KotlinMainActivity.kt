@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.support.v4.content.FileProvider
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
@@ -21,6 +22,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonParser
+import com.zhy.base.fileprovider.FileProvider7
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.setting_page.*
 import net.louislam.android.L
@@ -182,21 +184,29 @@ class KotlinMainActivity : MainActivity() {
                         val je = jp.parse(rootObj.getJSONObject("hashMap").toString());
                         file3.writeText(gson.toJson(je))
 
-
+                        openFile(file3, "application/json")
                     } else if (format == "CSV") {
                         filename = "export-$date.csv"
                         val file3 = File(file2, filename)
                         historyAdapter.saveCSV(file3)
-
+                        openFile(file3, "text/csv")
                     }
 
                     longToast("Saved: ${filename}")
+
                 } catch (ex : java.lang.Exception) {
                     alert("Cannot write file: ${ex.message}").show();
+
                 }
             }
         }
 
+    }
+
+    fun openFile(file : File, mine : String) {
+        val intent = Intent(Intent.ACTION_VIEW);
+        FileProvider7.setIntentDataAndType(this, intent, mine, file, true);
+        startActivity(intent);
     }
 
 
