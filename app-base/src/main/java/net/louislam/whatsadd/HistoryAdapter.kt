@@ -35,8 +35,8 @@ class HistoryAdapter(private val context: KotlinMainActivity, disable : Boolean)
             }
         }
 
-    private var items : MapArrayList<String, Phone>
-    private val gson = GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+    var items : MapArrayList<String, Phone>
+    val gson = GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
 
     init {
@@ -86,7 +86,6 @@ class HistoryAdapter(private val context: KotlinMainActivity, disable : Boolean)
         }
 
         val targetPhone : Phone;
-
         val foundPhone : Phone? = items.remove(phone.getFullPhone())
 
         // if found, bring to the top

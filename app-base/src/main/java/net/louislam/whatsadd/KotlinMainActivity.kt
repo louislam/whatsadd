@@ -125,7 +125,7 @@ class KotlinMainActivity : MainActivity() {
         }
 
         darkThemeSwitch.isChecked = enableDarkTheme
-        darkThemeSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+        darkThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
             LStorage.store(this, "enableDarkTheme", isChecked)
             toast(getString(R.string.theme_changed));
             recreate()
@@ -161,42 +161,53 @@ class KotlinMainActivity : MainActivity() {
             val formats = listOf("CSV", "JSON")
             selector(getString(R.string.export_format), formats) { _, i ->
                 val format = formats[i]
+                var folder = "";
 
                 try {
 
                     // Make Folder
                     val file = getExternalFilesDir(null)
                     val file2 = File(file, "export")
+                    folder = file2.absolutePath
                     var filename = ""
                     file2.mkdirs()
 
                     val sdf = SimpleDateFormat("yyyyMMdd-hhmmss")
                     val date = sdf.format(Date())
 
+                    val path = folder.replace("/storage/emulated/0/", "")
+
                     if (format == "JSON") {
                         filename = "export-$date.json"
                         val file3 = File(file2, filename)
 
-                        val rootObj = JSONObject(historyAdapter.getJSON()!!)
+                        val jsonString = historyAdapter.gson.toJson(historyAdapter.items)
+                        val rootObj = JSONObject(jsonString)
 
                         val gson = GsonBuilder().setPrettyPrinting().create();
                         val jp =  JsonParser();
                         val je = jp.parse(rootObj.getJSONObject("hashMap").toString());
                         file3.writeText(gson.toJson(je))
 
+                        alert("Exported successfully! (${path})").show()
                         openFile(file3, "application/json")
+
+
                     } else if (format == "CSV") {
                         filename = "export-$date.csv"
                         val file3 = File(file2, filename)
                         historyAdapter.saveCSV(file3)
+
+                        alert("Exported successfully! (${path})").show()
                         openFile(file3, "text/csv")
                     }
 
                     longToast("Saved: ${filename}")
+                } catch (ex : ActivityNotFoundException) {
 
-                } catch (ex : java.lang.Exception) {
-                    alert("Cannot write file: ${ex.message}").show();
 
+                } catch (ex : Exception) {
+                    alert("Error: ${ex.message}").show();
                 }
             }
         }
