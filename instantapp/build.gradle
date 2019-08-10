@@ -1,13 +1,13 @@
 apply plugin: 'com.android.instantapp'
 
 android {
-    buildToolsVersion '28.0.2'
-    compileSdkVersion 26
+    buildToolsVersion '28.0.3'
+    compileSdkVersion 28
     defaultConfig {
         versionCode 6
         versionName '1.4'
         minSdkVersion 17
-        targetSdkVersion 26
+        targetSdkVersion 28
     }
     productFlavors {
     }
