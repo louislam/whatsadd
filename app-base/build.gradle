@@ -1,10 +1,8 @@
-apply plugin: 'com.android.feature'
+apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    baseFeature = true
-
     signingConfigs {
     }
 
@@ -12,14 +10,15 @@ android {
         disable 'MissingTranslation'
         checkReleaseBuilds false
     }
-    compileSdkVersion 28
+
+    compileSdkVersion 32
 
     defaultConfig {
+        applicationId "net.louislam.whatsadd"
         minSdkVersion 17
-        targetSdkVersion 28
-        //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        //vectorDrawables.useSupportLibrary = true
-        //resConfigs "auto"
+        targetSdkVersion 32
+        versionCode 16
+        versionName "1.7.2"
     }
     buildTypes {
         release {
@@ -30,14 +29,15 @@ android {
 
         debug {
             resValue "string", "app_name", "WhatsAdd (Debug)"
+            applicationIdSuffix ".debug"
         }
 
     }
 }
 
 dependencies {
-    api 'com.android.support:support-v4:27.1.1'
-    api 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
