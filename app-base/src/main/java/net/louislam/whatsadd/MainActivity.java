@@ -216,7 +216,7 @@ public abstract class MainActivity extends AppCompatActivity implements DialogIn
                     }
 
                     AlertDialog b = new AlertDialog.Builder(MainActivity.this).setMessage(Html.fromHtml("<h2>WhatsAdd</h2>" +
-                            version + design + " LouisLam &copy; 2017-2018<br><br>" +
+                            version + design + " LouisLam &copy; 2017<br><br>" +
                             "Twitter: <a href=\"https://twitter.com/LouisLam\">@LouisLam</a><br/><br/>" +
                             "GitHub: <a href=\"https://github.com/louislam/whatsadd\">@louislam</a><br /><br/>"
                     )).create();
