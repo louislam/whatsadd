@@ -112,7 +112,7 @@ class KotlinMainActivity : MainActivity() {
         itemTouchHelper.attachToRecyclerView(historyRecycleView)
 
         settingView.animate().setListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator?) {
+            override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
                 if (currentPage == "add") {
                     settingView.visibility = View.GONE

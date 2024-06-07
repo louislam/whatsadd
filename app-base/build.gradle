@@ -11,14 +11,14 @@ android {
         checkReleaseBuilds false
     }
 
-    compileSdkVersion 32
+    compileSdkVersion 34
 
     defaultConfig {
         applicationId "net.louislam.whatsadd"
         minSdkVersion 17
-        targetSdkVersion 32
-        versionCode 16
-        versionName "1.7.2"
+        targetSdkVersion 34
+        versionCode 17
+        versionName "1.7.3"
     }
     buildTypes {
         release {
