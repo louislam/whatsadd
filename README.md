@@ -11,7 +11,9 @@ This is an Android small useful app which I developed in 2017. Now I decide to o
 
 ## Download
 
-[<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="200" />](https://play.google.com/store/apps/details?id=net.louislam.whatsadd&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1)
+APK:
+https://github.com/louislam/whatsadd/releases/latest
+
 
 ## News
 
